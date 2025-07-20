@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, Activity } from 'lucide-react';
+import { ExternalLink, Activity, Github } from 'lucide-react';
 
 interface AIService {
   id: string;
@@ -79,14 +79,24 @@ const AIServiceCard: React.FC<AIServiceCardProps> = ({ service }) => {
 
         {/* Action Buttons */}
         <div className="mt-auto">
-          <button
-            onClick={handleOpenService}
-            disabled={service.status === 'offline'}
-            className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-accent-500 to-accent-600 text-white py-3 px-4 rounded-2xl font-medium hover:from-accent-600 hover:to-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 font-apple hover:scale-105 shadow-lg hover:shadow-xl"
-          >
-            <ExternalLink className="w-4 h-4" />
-            <span>Live Demo</span>
-          </button>
+          <div className="space-y-3">
+            <button
+              onClick={handleOpenService}
+              disabled={service.status === 'offline'}
+              className="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-accent-500 to-accent-600 text-white py-3 px-4 rounded-2xl font-medium hover:from-accent-600 hover:to-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 font-apple hover:scale-105 shadow-lg hover:shadow-xl"
+            >
+              <ExternalLink className="w-4 h-4" />
+              <span>Live Demo</span>
+            </button>
+            <button
+              onClick={() => window.open('https://github.com/Anilkumaryadavkare/', '_blank', 'noopener,noreferrer')}
+              disabled={service.status === 'offline'}
+              className="w-full flex items-center justify-center space-x-2 bg-white dark:bg-gray-700 text-apple-gray-900 dark:text-white py-3 px-4 rounded-2xl font-medium border border-apple-gray-300 dark:border-gray-600 hover:bg-apple-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 transition-all duration-300 font-apple hover:scale-105 shadow-sm hover:shadow-lg"
+            >
+              <Github className="w-4 h-4" />
+              <span>Code</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

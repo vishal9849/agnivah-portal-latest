@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Brain, Zap, Target, Users, Shield, Clock, CheckCircle, TrendingUp, FileText, BarChart3, Calculator, Mail, Phone, MapPin, ExternalLink, Linkedin, Twitter, Github } from 'lucide-react';
+import { ArrowRight, Brain, Zap, Target, Users, Shield, Clock, CheckCircle, TrendingUp, FileText, BarChart3, Calculator, Mail, Phone, MapPin, ExternalLink, Linkedin, Twitter, Github, Inbox, Video, Scissors } from 'lucide-react';
 import AIServiceCard from '../components/AIServiceCard';
 import ThemeToggle from '../components/ThemeToggle';
 
@@ -18,16 +18,6 @@ const HomePage: React.FC = () => {
     },
     {
       id: '2',
-      title: 'CV Analyzer Svelte',
-      description: 'Modern CV analysis tool built with Svelte framework. Automatically extracts key information, skills, and experience from resumes with intelligent parsing capabilities.',
-      url: 'http://20.6.93.130:5173/',
-      status: 'online' as const,
-      category: 'HR Analytics',
-      icon: <FileText className="w-5 h-5" />,
-      image: 'https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=800'
-    },
-    {
-      id: '3',
       title: 'CV Analyzer Streamlit',
       description: 'Streamlit-based CV analysis platform for comprehensive resume evaluation, skill matching, and candidate assessment with interactive visualizations.',
       url: 'http://20.198.240.78:8501/',
@@ -37,7 +27,7 @@ const HomePage: React.FC = () => {
       image: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800'
     },
     {
-      id: '4',
+      id: '3',
       title: 'WBS-AUC Reconciliation Dashboard',
       description: 'Work Breakdown Structure and Activity-Based Costing reconciliation dashboard for project management and financial tracking with real-time updates.',
       url: 'http://20.195.24.94:8501/',
@@ -47,7 +37,7 @@ const HomePage: React.FC = () => {
       image: 'https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=800'
     },
     {
-      id: '5',
+      id: '4',
       title: 'GL Commentary Logic & Monthly Close Automation',
       description: 'General Ledger commentary automation system that streamlines monthly close processes with intelligent analysis and automated report generation.',
       url: 'http://172.188.98.57:8501/',
@@ -56,36 +46,45 @@ const HomePage: React.FC = () => {
       icon: <Brain className="w-5 h-5" />,
       image: 'https://images.pexels.com/photos/6801874/pexels-photo-6801874.jpeg?auto=compress&cs=tinysrgb&w=800'
     },
-    // Additional dummy services for demonstration
     {
-      id: '6',
-      title: 'Document Processing Engine',
-      description: 'AI-powered document processing system for automated data extraction, classification, and workflow management across multiple document types.',
-      url: 'http://20.212.249.94:8501/',
-      status: 'maintenance' as const,
-      category: 'Document AI',
-      icon: <FileText className="w-5 h-5" />,
+      id: '5',
+      title: 'Email Aggregator Agent',
+      description: 'AI agent that connects to email and classifies emails into Promotional, Sensitive, Junk categories and summarizes each one in a single line using LLM for efficient email management.',
+      url: 'https://runner.hcompany.ai/chat/d97762ce-d0ab-40d1-9f04-f4991d3f2649/share',
+      status: 'online' as const,
+      category: 'Email AI',
+      icon: <Inbox className="w-5 h-5" />,
       image: 'https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=800'
     },
     {
-      id: '7',
-      title: 'Customer Support Assistant',
-      description: 'Intelligent customer support automation with natural language processing, ticket routing, and response generation capabilities.',
-      url: 'http://demo.example.com:8087',
-      status: 'offline' as const,
-      category: 'Support',
-      icon: <Users className="w-5 h-5" />,
+      id: '6',
+      title: 'Instagram Reels AI Agent',
+      description: 'No signup needed. Fully autonomous AI Reels machine for content automation. Perfect for AI agents, content automation, full-stack AI apps, and monetizing short-form content.',
+      url: 'https://viral-ai-video-engine.netlify.app/',
+      status: 'online' as const,
+      category: 'Content AI',
+      icon: <Video className="w-5 h-5" />,
       image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800'
     },
     {
-      id: '8',
-      title: 'Risk Assessment Platform',
-      description: 'Comprehensive risk analysis and assessment platform using advanced analytics to identify, evaluate, and mitigate business risks.',
-      url: 'http://demo.example.com:8088',
-      status: 'maintenance' as const,
-      category: 'Risk Management',
-      icon: <Shield className="w-5 h-5" />,
+      id: '7',
+      title: 'Elite Barber Shop App',
+      description: 'Complete barber shop management system with real-time slot booking, barber dashboard, simulated WhatsApp/SMS notifications, and responsive design for modern salon operations.',
+      url: 'https://anilkumaryadavkare.github.io/baber_SMB/',
+      status: 'online' as const,
+      category: 'Business App',
+      icon: <Scissors className="w-5 h-5" />,
       image: 'https://images.pexels.com/photos/6801648/pexels-photo-6801648.jpeg?auto=compress&cs=tinysrgb&w=800'
+    },
+    {
+      id: '8',
+      title: 'CV Analyzer Svelte',
+      description: 'Modern CV analysis tool built with Svelte framework. Automatically extracts key information, skills, and experience from resumes with intelligent parsing capabilities.',
+      url: 'http://20.6.93.130:5173/',
+      status: 'offline' as const,
+      category: 'HR Analytics',
+      icon: <FileText className="w-5 h-5" />,
+      image: 'https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=800'
     }
   ];
 
@@ -385,8 +384,7 @@ const HomePage: React.FC = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-apple-gray-900 dark:text-white mb-1">Email</h4>
-                      <p className="text-apple-gray-600 dark:text-gray-300">hello@agnivah.ai</p>
-                      <p className="text-apple-gray-600 dark:text-gray-300">support@agnivah.ai</p>
+                      <p className="text-apple-gray-600 dark:text-gray-300">anil.kare@agnivah.com</p>
                     </div>
                   </div>
                   <div className="flex items-start space-x-4">
@@ -405,8 +403,7 @@ const HomePage: React.FC = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-apple-gray-900 dark:text-white mb-1">Office</h4>
-                      <p className="text-apple-gray-600 dark:text-gray-300">123 AI Street</p>
-                      <p className="text-apple-gray-600 dark:text-gray-300">Tech City, TC 12345</p>
+                      <p className="text-apple-gray-600 dark:text-gray-300">Nacharam, Hyderabad, IN</p>
                     </div>
                   </div>
                 </div>
@@ -417,18 +414,24 @@ const HomePage: React.FC = () => {
                 <div className="flex space-x-4">
                   <a
                     href="#"
+                   target="_blank"
+                   rel="noopener noreferrer"
                     className="w-12 h-12 bg-apple-gray-100 dark:bg-gray-700 rounded-2xl flex items-center justify-center hover:bg-accent-100 dark:hover:bg-accent-900/30 transition-all duration-300 hover:scale-110"
                   >
                     <Github className="w-6 h-6 text-apple-gray-600 dark:text-gray-300 hover:text-accent-600" />
                   </a>
                   <a
                     href="#"
+                   target="_blank"
+                   rel="noopener noreferrer"
                     className="w-12 h-12 bg-apple-gray-100 dark:bg-gray-700 rounded-2xl flex items-center justify-center hover:bg-accent-100 dark:hover:bg-accent-900/30 transition-all duration-300 hover:scale-110"
                   >
                     <Linkedin className="w-6 h-6 text-apple-gray-600 dark:text-gray-300 hover:text-accent-600" />
                   </a>
                   <a
-                    href="#"
+                    href="https://x.com/AgnivahAI"
+                   target="_blank"
+                   rel="noopener noreferrer"
                     className="w-12 h-12 bg-apple-gray-100 dark:bg-gray-700 rounded-2xl flex items-center justify-center hover:bg-accent-100 dark:hover:bg-accent-900/30 transition-all duration-300 hover:scale-110"
                   >
                     <Twitter className="w-6 h-6 text-apple-gray-600 dark:text-gray-300 hover:text-accent-600" />
@@ -469,16 +472,34 @@ const HomePage: React.FC = () => {
                 Transforming businesses by replacing inefficiency with intelligence through domain-specific AI agents.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="text-apple-gray-400 hover:text-accent-400 transition-colors duration-300">
+                <a 
+                  href="https://github.com/Anilkumaryadavkare" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-apple-gray-400 hover:text-accent-400 transition-colors duration-300"
+                >
                   <Github className="w-6 h-6" />
                 </a>
-                <a href="#" className="text-apple-gray-400 hover:text-accent-400 transition-colors duration-300">
+                <a 
+                  href="https://www.linkedin.com/company/agnivah/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-apple-gray-400 hover:text-accent-400 transition-colors duration-300"
+                >
                   <Linkedin className="w-6 h-6" />
                 </a>
-                <a href="#" className="text-apple-gray-400 hover:text-accent-400 transition-colors duration-300">
+                <a 
+                  href="https://x.com/AgnivahAI" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-apple-gray-400 hover:text-accent-400 transition-colors duration-300"
+                >
                   <Twitter className="w-6 h-6" />
                 </a>
-                <a href="#" className="text-apple-gray-400 hover:text-accent-400 transition-colors duration-300">
+                <a 
+                  href="mailto:anil.kare@agnivah.com" 
+                  className="text-apple-gray-400 hover:text-accent-400 transition-colors duration-300"
+                >
                   <Mail className="w-6 h-6" />
                 </a>
               </div>
@@ -490,13 +511,17 @@ const HomePage: React.FC = () => {
                 <li><a href="#" className="hover:text-accent-400 transition-colors duration-300">CV Analysis</a></li>
                 <li><a href="#" className="hover:text-accent-400 transition-colors duration-300">Financial Automation</a></li>
                 <li><a href="#" className="hover:text-accent-400 transition-colors duration-300">Document Processing</a></li>
+                <li><button onClick={() => scrollToSection('projects')} className="hover:text-accent-400 transition-colors duration-300 text-left">Demand Forecasting</button></li>
+                <li><button onClick={() => scrollToSection('projects')} className="hover:text-accent-400 transition-colors duration-300 text-left">CV Analysis</button></li>
+                <li><button onClick={() => scrollToSection('projects')} className="hover:text-accent-400 transition-colors duration-300 text-left">Email Automation</button></li>
+                <li><button onClick={() => scrollToSection('projects')} className="hover:text-accent-400 transition-colors duration-300 text-left">Content AI</button></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-apple-gray-400">
-                <li><a href="#" className="hover:text-accent-400 transition-colors duration-300">About</a></li>
-                <li><a href="#contact" className="hover:text-accent-400 transition-colors duration-300">Contact</a></li>
+                <li><button onClick={() => scrollToSection('about')} className="hover:text-accent-400 transition-colors duration-300 text-left">About</button></li>
+                <li><button onClick={() => scrollToSection('contact')} className="hover:text-accent-400 transition-colors duration-300 text-left">Contact</button></li>
                 <li><a href="#" className="hover:text-accent-400 transition-colors duration-300">Privacy Policy</a></li>
                 <li><a href="#" className="hover:text-accent-400 transition-colors duration-300">Terms of Service</a></li>
               </ul>
