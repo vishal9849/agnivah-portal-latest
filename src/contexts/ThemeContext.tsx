@@ -23,25 +23,46 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as Theme;
-    if (savedTheme) {
+    if (savedTheme && ['light', 'dark'].includes(savedTheme)) {
       setTheme(savedTheme);
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setTheme('dark');
+    } else {
+      // Default to light theme
+      setTheme('light');
     }
   }, []);
 
   useEffect(() => {
     localStorage.setItem('theme', theme);
     
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
+    // Remove all theme classes first
+    document.documentElement.classList.remove('dark', 'light');
+    document.body.classList.remove('dark', 'light');
+    
+    // Add the current theme class to both html and body
+    document.documentElement.classList.add(theme);
+    document.body.classList.add(theme);
+    
+    // Update meta theme-color for mobile browsers
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (!metaThemeColor) {
+      const meta = document.createElement('meta');
+      meta.name = 'theme-color';
+      document.head.appendChild(meta);
+    }
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) {
+      const colors = {
+        dark: '#111827',
+        light: '#ffffff'
+      };
+      meta.setAttribute('content', colors[theme]);
     }
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    setTheme(prev => {
+      return prev === 'light' ? 'dark' : 'light';
+    });
   };
 
   return (
