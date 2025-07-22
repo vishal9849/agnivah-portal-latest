@@ -1,22 +1,33 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { ArrowLeft, FileText } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { COMPANY_INFO } from '../config/constants';
 
 const TermsOfService: React.FC = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleBackToHome = () => {
+    navigate('/', { state: { scrollToFooter: true } });
+  };
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 font-apple transition-colors duration-300">
       {/* Header */}
       <header className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-gray-700/50 sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
-            <Link 
-              to="/" 
-              className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
+            <button
+              onClick={handleBackToHome}
+              className="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 hover:scale-105 hover:-translate-y-0.5"
             >
               <ArrowLeft className="w-5 h-5" />
               <span>Back to Home</span>
-            </Link>
+            </button>
             <div className="flex items-center space-x-3">
               <FileText className="w-6 h-6 text-accent-600" />
               <span className="text-title font-semibold text-gray-900 dark:text-white">Terms of Service</span>

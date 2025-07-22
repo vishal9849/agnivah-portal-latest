@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Github, Linkedin, Twitter, Mail } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { aiServices } from '../config/services.tsx';
 import { COMPANY_INFO, NAVIGATION_LINKS } from '../config/constants';
 import AIServiceCard from '../components/AIServiceCard';
 import ThemeToggle from '../components/ThemeToggle';
+import ScrollNavigation from '../components/ScrollNavigation';
+import { useScrollNavigation } from '../hooks/useScrollNavigation';
+import { scrollToSection } from '../utils/navigation';
 
 const HomePage: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [isScrolled, setIsScrolled] = useState(false);
+  const { activeSection } = useScrollNavigation();
+  const location = useLocation();
 
   const categories = ['All', ...Array.from(new Set(aiServices.map(service => service.category)))];
   const filteredServices = selectedCategory === 'All' 
     ? aiServices 
     : aiServices.filter(service => service.category === selectedCategory);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handleScrollToSection = (sectionId: string) => {
+    scrollToSection(sectionId);
     setIsMenuOpen(false);
   };
 
@@ -30,8 +32,20 @@ const HomePage: React.FC = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (location.state?.scrollToFooter) {
+      setTimeout(() => {
+        const footer = document.querySelector('footer');
+        if (footer) {
+          footer.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [location.state]);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 font-apple transition-all duration-400">
@@ -65,7 +79,7 @@ const HomePage: React.FC = () => {
               ].map((item, index) => (
                 <button 
                   key={item.id}
-                  onClick={() => scrollToSection(item.id)}
+                  onClick={() => handleScrollToSection(item.id)}
                   className="text-gray-600 dark:text-gray-300 hover:text-accent-600 transition-all duration-300 font-medium hover:scale-105 animate-fade-in"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
@@ -98,7 +112,7 @@ const HomePage: React.FC = () => {
                 ].map((item) => (
                   <button 
                     key={item.id}
-                    onClick={() => scrollToSection(item.id)}
+                    onClick={() => handleScrollToSection(item.id)}
                     className="text-left text-gray-600 dark:text-gray-300 hover:text-accent-600 transition-all duration-300 px-4 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800"
                   >
                     {item.label}
@@ -111,8 +125,11 @@ const HomePage: React.FC = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"></div>
+      <section id="hero" className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-accent-50/30 to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"></div>
+        
+        {/* Additional gradient overlay for more depth */}
+        <div className="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-accent-100/20 dark:from-gray-900/20 dark:via-transparent dark:to-gray-800/20"></div>
         
         <div className="max-w-7xl mx-auto text-center relative z-10">
           <div className="max-w-4xl mx-auto">
@@ -125,13 +142,13 @@ const HomePage: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <button 
-                onClick={() => scrollToSection(NAVIGATION_LINKS.projects)}
+                onClick={() => handleScrollToSection(NAVIGATION_LINKS.projects)}
                 className="bg-gradient-to-r from-accent-500 to-accent-600 text-white px-8 py-4 rounded-2xl font-medium hover:from-accent-600 hover:to-accent-700 focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 transition-all duration-300 font-apple hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 Explore AI Services
               </button>
               <button 
-                onClick={() => scrollToSection(NAVIGATION_LINKS.contact)}
+                onClick={() => handleScrollToSection(NAVIGATION_LINKS.contact)}
                 className="glass-effect text-gray-900 dark:text-white px-8 py-4 rounded-2xl font-medium hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-300 font-apple hover:scale-105 shadow-sm hover:shadow-xl"
               >
                 Get in Touch
@@ -142,7 +159,11 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* About Section */}
-      <section id={NAVIGATION_LINKS.about} className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
+      <section id={NAVIGATION_LINKS.about} className={`py-20 px-4 sm:px-6 lg:px-8 transition-all duration-700 ${
+        activeSection === NAVIGATION_LINKS.about 
+          ? 'bg-gradient-to-br from-accent-50/50 via-accent-25/30 to-gray-50 dark:from-accent-900/20 dark:via-gray-800 dark:to-accent-900/10 shadow-inner' 
+          : 'bg-gradient-to-br from-gray-50 via-gray-25 to-gray-100 dark:bg-gradient-to-br dark:from-gray-800 dark:via-gray-850 dark:to-gray-800'
+      }`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold text-gray-900 dark:text-white mb-8">
@@ -156,7 +177,11 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Services Section */}
-      <section id={NAVIGATION_LINKS.projects} className="py-20 px-4 sm:px-6 lg:px-8">
+      <section id={NAVIGATION_LINKS.projects} className={`py-20 px-4 sm:px-6 lg:px-8 transition-all duration-700 ${
+        activeSection === NAVIGATION_LINKS.projects 
+          ? 'bg-gradient-to-br from-white via-accent-50/20 to-accent-25/10 dark:from-gray-900 dark:via-accent-900/10 dark:to-gray-900 shadow-inner' 
+          : 'bg-gradient-to-br from-white via-gray-25/20 to-gray-50/30 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-875 dark:to-gray-900'
+      }`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold text-gray-900 dark:text-white mb-8">
@@ -196,7 +221,11 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Mission Section */}
-      <section id={NAVIGATION_LINKS.mission} className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-800">
+      <section id={NAVIGATION_LINKS.mission} className={`py-20 px-4 sm:px-6 lg:px-8 transition-all duration-700 ${
+        activeSection === NAVIGATION_LINKS.mission 
+          ? 'bg-gradient-to-br from-accent-50/50 via-accent-25/30 to-gray-50 dark:from-accent-900/20 dark:via-gray-800 dark:to-accent-900/10 shadow-inner' 
+          : 'bg-gradient-to-br from-gray-50 via-gray-25 to-gray-100 dark:bg-gradient-to-br dark:from-gray-800 dark:via-gray-850 dark:to-gray-800'
+      }`}>
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-5xl font-bold text-gray-900 dark:text-white mb-8">
             Our Mission
@@ -208,7 +237,11 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Contact Section */}
-      <section id={NAVIGATION_LINKS.contact} className="py-20 px-4 sm:px-6 lg:px-8">
+      <section id={NAVIGATION_LINKS.contact} className={`py-20 px-4 sm:px-6 lg:px-8 transition-all duration-700 ${
+        activeSection === NAVIGATION_LINKS.contact 
+          ? 'bg-gradient-to-br from-white via-accent-50/20 to-accent-25/10 dark:from-gray-900 dark:via-accent-900/10 dark:to-gray-900 shadow-inner' 
+          : 'bg-gradient-to-br from-white via-gray-25/20 to-gray-50/30 dark:bg-gradient-to-br dark:from-gray-900 dark:via-gray-875 dark:to-gray-900'
+      }`}>
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-5xl font-bold text-gray-900 dark:text-white mb-8">
             Get in Touch
@@ -338,7 +371,7 @@ const HomePage: React.FC = () => {
                 ].map((item) => (
                   <li key={item.id}>
                     <button 
-                      onClick={() => scrollToSection(item.id)} 
+                      onClick={() => handleScrollToSection(item.id)} 
                       className="hover:text-accent-400 transition-all duration-300 text-left hover:translate-x-1"
                     >
                       {item.label}
@@ -385,6 +418,9 @@ const HomePage: React.FC = () => {
           </div>
         </div>
       </footer>
+
+      {/* Scroll Navigation */}
+      <ScrollNavigation />
     </div>
   );
 };

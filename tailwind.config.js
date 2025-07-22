@@ -23,6 +23,7 @@ export default {
       colors: {
         'accent': {
           50: '#f0fdfa',
+          25: '#f7fffe',
           100: '#ccfbf1',
           200: '#99f6e4',
           300: '#5eead4',
@@ -33,12 +34,17 @@ export default {
           800: '#115e59',
           900: '#134e4a',
         },
+        'gray': {
+          25: '#fcfcfd',
+          850: '#1a202c',
+          875: '#151a23',
+        },
       },
       animation: {
         'fade-in': 'fadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
-        'slide-up': 'slideUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
-        'slide-down': 'slideDown 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
-        'scale-in': 'scaleIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
+       'slide-up': 'slideUp 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) forwards',
+       'slide-down': 'slideDown 0.8s cubic-bezier(0.25, 0.1, 0.25, 1) forwards',
+       'scale-in': 'scaleIn 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) forwards',
         'float': 'float 6s ease-in-out infinite',
         'bounce-gentle': 'bounceGentle 2s ease-in-out infinite',
         'pulse-soft': 'pulseSoft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -80,10 +86,10 @@ export default {
         '3xl': '64px',
       },
       transitionTimingFunction: {
-        'apple': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        'apple': 'cubic-bezier(0.25, 0.1, 0.25, 1)',
       },
       transitionDuration: {
-        '400': '400ms',
+        '600': '600ms',
       },
     },
   },
